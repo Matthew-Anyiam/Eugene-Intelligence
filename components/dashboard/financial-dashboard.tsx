@@ -11,6 +11,9 @@ import { ResearchPanel } from "./research-panel";
 import { WatchlistWidget } from "./watchlist-widget";
 import { NewsAndAlerts } from "./news-and-alerts";
 import { QuickActions } from "./quick-actions";
+import { MarketBriefingWidget } from "@/components/intelligence/market-briefing-widget";
+import { NewsIntelligenceWidget } from "@/components/intelligence/news-intelligence-widget";
+import { EarningsIntelligenceWidget } from "@/components/intelligence/earnings-intelligence-widget";
 
 export function FinancialDashboard() {
   const [activePanel, setActivePanel] = useState<'overview' | 'portfolio' | 'research' | 'analytics'>('overview');
@@ -110,19 +113,30 @@ export function FinancialDashboard() {
             {/* Market Overview */}
             <MarketOverview />
             
-            {/* Three Column Layout */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              {/* Left Column - Portfolio Summary */}
+            {/* Intelligence Widgets Row */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <MarketBriefingWidget />
+              <NewsIntelligenceWidget />
+            </div>
+            
+            {/* Four Column Layout */}
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+              {/* Portfolio Summary */}
               <div className="lg:col-span-1">
                 <PortfolioSummary />
               </div>
 
-              {/* Middle Column - Watchlist */}
+              {/* Watchlist */}
               <div className="lg:col-span-1">
                 <WatchlistWidget />
               </div>
 
-              {/* Right Column - News & Alerts */}
+              {/* Earnings Intelligence */}
+              <div className="lg:col-span-1">
+                <EarningsIntelligenceWidget />
+              </div>
+
+              {/* News & Alerts */}
               <div className="lg:col-span-1">
                 <NewsAndAlerts />
               </div>
