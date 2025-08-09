@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { TrendingUp, TrendingDown, DollarSign, BarChart3, PieChart, Activity, AlertCircle, Search, Sparkles } from "lucide-react";
+import { TrendingUp, TrendingDown, DollarSign, BarChart3, PieChart, Activity, AlertCircle, Search, Sparkles, Bot } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,9 +14,10 @@ import { QuickActions } from "./quick-actions";
 import { MarketBriefingWidget } from "@/components/intelligence/market-briefing-widget";
 import { NewsIntelligenceWidget } from "@/components/intelligence/news-intelligence-widget";
 import { EarningsIntelligenceWidget } from "@/components/intelligence/earnings-intelligence-widget";
+import AgentDashboard from "@/components/agents/agent-dashboard";
 
 export function FinancialDashboard() {
-  const [activePanel, setActivePanel] = useState<'overview' | 'portfolio' | 'research' | 'analytics'>('overview');
+  const [activePanel, setActivePanel] = useState<'overview' | 'portfolio' | 'research' | 'analytics' | 'agents'>('overview');
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -70,6 +71,14 @@ export function FinancialDashboard() {
                 >
                   <Activity className="mr-2 h-4 w-4" />
                   Analytics
+                </Button>
+                <Button
+                  variant={activePanel === 'agents' ? 'default' : 'ghost'}
+                  onClick={() => setActivePanel('agents')}
+                  size="sm"
+                >
+                  <Bot className="mr-2 h-4 w-4" />
+                  Agents
                 </Button>
               </div>
             </div>
@@ -168,6 +177,12 @@ export function FinancialDashboard() {
               <h2 className="text-xl font-semibold mb-4">Advanced Analytics</h2>
               <p className="text-gray-600">Risk analytics and modeling tools coming soon...</p>
             </Card>
+          </div>
+        )}
+
+        {activePanel === 'agents' && (
+          <div className="space-y-6">
+            <AgentDashboard />
           </div>
         )}
       </div>
